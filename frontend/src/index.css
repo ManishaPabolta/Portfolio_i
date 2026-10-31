@@ -140,25 +140,158 @@ a {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(32, 39, 86, 0.42), transparent 58%),
+    linear-gradient(180deg, rgba(7, 11, 22, 0.12), rgba(7, 11, 22, 0.48));
+}
+
+.background-art::after {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  content: '';
+  background:
+    radial-gradient(ellipse at center, transparent 20%, rgba(5, 7, 16, 0.48) 100%),
+    linear-gradient(180deg, rgba(7, 11, 22, 0.04), rgba(7, 11, 22, 0.34));
+}
+
+.aurora {
+  position: absolute;
+  z-index: -1;
+  width: min(58vw, 54rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(82px);
+  opacity: 0.2;
+  will-change: transform;
+}
+
+.aurora-one {
+  top: -36%;
+  left: -14%;
+  background: conic-gradient(from 100deg, #5b65ed, #963fe2, #35b8dc, #5b65ed);
+  animation: aurora-drift 28s ease-in-out infinite alternate;
+}
+
+.aurora-two {
+  top: 24%;
+  right: -24%;
+  width: min(52vw, 48rem);
+  background: conic-gradient(from 30deg, #7a4be8, #226ed6, #31b6b0, #7a4be8);
+  animation: aurora-drift 34s ease-in-out -11s infinite alternate-reverse;
+}
+
+.aurora-three {
+  bottom: -56%;
+  left: 28%;
+  width: min(48vw, 42rem);
+  background: conic-gradient(from 220deg, #276de2, #783fe0, #1a9cbb, #276de2);
+  animation: aurora-drift 31s ease-in-out -18s infinite alternate;
 }
 
 .grid-layer {
   position: absolute;
+  z-index: 1;
   inset: 0;
-  opacity: 0.18;
+  opacity: 0.24;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(rgba(173, 185, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 185, 255, 0.055) 1px, transparent 1px);
+  background-size: 68px 68px;
+  animation: grid-drift 38s linear infinite;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent 80%);
+}
+
+.orbit-ring {
+  position: absolute;
+  z-index: 1;
+  width: clamp(18rem, 34vw, 34rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(151, 164, 255, 0.11);
+  border-radius: 50%;
+  box-shadow: inset 0 0 50px rgba(114, 100, 255, 0.035), 0 0 50px rgba(114, 100, 255, 0.025);
+  animation: orbit-breathe 12s ease-in-out infinite;
+}
+
+.orbit-ring::before,
+.orbit-ring::after {
+  position: absolute;
+  inset: 9%;
+  border: 1px dashed rgba(125, 211, 252, 0.12);
+  border-radius: 50%;
+  content: '';
+}
+
+.orbit-ring::after {
+  inset: 21%;
+  border-style: solid;
+  border-color: rgba(192, 132, 252, 0.1);
+}
+
+.orbit-ring span {
+  position: absolute;
+  top: 17%;
+  left: 19%;
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #a5b4fc;
+  box-shadow: 0 0 18px 4px rgba(129, 140, 248, 0.7);
+  animation: orbit-dot 18s linear infinite;
+  transform-origin: 9rem 9rem;
+}
+
+.orbit-one {
+  top: 10%;
+  right: 5%;
+}
+
+.orbit-two {
+  bottom: -19%;
+  left: 5%;
+  width: clamp(16rem, 28vw, 28rem);
+  animation-delay: -5s;
+}
+
+.orbit-two span {
+  animation-duration: 24s;
+  transform-origin: 8rem 8rem;
+}
+
+.shooting-star {
+  position: absolute;
+  z-index: 2;
+  top: 18%;
+  left: -14rem;
+  width: 8rem;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.9), transparent);
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.7);
+  transform: rotate(-24deg);
+  animation: shooting-star 13s ease-in-out 2s infinite;
+}
+
+.shooting-star::after {
+  position: absolute;
+  top: -2px;
+  right: 18%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 12px 3px rgba(165, 180, 252, 0.8);
+  content: '';
 }
 
 .orb {
   position: absolute;
+  z-index: 0;
   border-radius: 999px;
-  filter: blur(80px);
-  opacity: 0.18;
-  animation: float 14s ease-in-out infinite;
+  filter: blur(88px);
+  opacity: 0.24;
+  animation: float 18s ease-in-out infinite;
 }
 
 .orb-one {
@@ -166,7 +299,7 @@ a {
   left: -7%;
   width: 28rem;
   height: 28rem;
-  background: rgba(99, 102, 241, 0.8);
+  background: rgba(99, 102, 241, 0.9);
 }
 
 .orb-two {
@@ -174,8 +307,9 @@ a {
   right: -8%;
   width: 26rem;
   height: 26rem;
-  background: rgba(168, 85, 247, 0.7);
-  animation-delay: -4s;
+  background: rgba(168, 85, 247, 0.8);
+  animation-duration: 22s;
+  animation-delay: -7s;
 }
 
 .orb-three {
@@ -183,8 +317,9 @@ a {
   left: 34%;
   width: 20rem;
   height: 20rem;
-  background: rgba(14, 165, 233, 0.62);
-  animation-delay: -8s;
+  background: rgba(14, 165, 233, 0.72);
+  animation-duration: 20s;
+  animation-delay: -12s;
 }
 
 .mouse-glow {
@@ -1978,6 +2113,31 @@ html.has-custom-cursor .mouse-glow {
   50% { transform: translate3d(0, -18px, 0); }
 }
 
+@keyframes aurora-drift {
+  0% { transform: translate3d(-4%, -2%, 0) rotate(-8deg) scale(0.94); }
+  50% { transform: translate3d(5%, 4%, 0) rotate(8deg) scale(1.06); }
+  100% { transform: translate3d(-2%, 7%, 0) rotate(15deg) scale(1); }
+}
+
+@keyframes grid-drift {
+  to { background-position: 68px 68px; }
+}
+
+@keyframes orbit-breathe {
+  0%, 100% { transform: scale(0.96) rotate(-8deg); opacity: 0.48; }
+  50% { transform: scale(1.04) rotate(8deg); opacity: 0.9; }
+}
+
+@keyframes orbit-dot {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shooting-star {
+  0%, 65%, 100% { transform: translate3d(0, 0, 0) rotate(-24deg); opacity: 0; }
+  68% { opacity: 0.9; }
+  78% { transform: translate3d(125vw, 48vh, 0) rotate(-24deg); opacity: 0; }
+}
+
 @keyframes bounce {
   0%,
   100% { transform: translateX(-50%) translateY(0); }
@@ -2030,6 +2190,31 @@ html.has-custom-cursor .mouse-glow {
   .mouse-glow {
     display: none;
   }
+
+  .aurora {
+    width: 82vw;
+    filter: blur(64px);
+    opacity: 0.16;
+  }
+
+  .orbit-ring {
+    width: 19rem;
+    opacity: 0.55;
+  }
+
+  .orbit-one {
+    top: 7%;
+    right: -42%;
+  }
+
+  .orbit-two {
+    bottom: 4%;
+    left: -42%;
+  }
+
+  .grid-layer {
+    background-size: 54px 54px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2045,5 +2230,11 @@ html.has-custom-cursor .mouse-glow {
   .custom-cursor::before,
   .custom-cursor::after {
     animation: none;
+  }
+
+  .background-art *,
+  .background-art::before,
+  .background-art::after {
+    animation: none !important;
   }
 }
